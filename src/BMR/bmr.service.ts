@@ -14,10 +14,10 @@ export class BmrService {
     activity: string,
   ) {
     let bmr: number;
-    if (gender.toLowerCase() === 'men') {
+    if (gender.toLowerCase() === 'male') {
       bmr = 88.362 + 13.397 * weight + 4.799 * height * 100 - 5.677 * age;
     }
-    if (gender.toLowerCase() === 'women') {
+    if (gender.toLowerCase() === 'female') {
       bmr = 447.593 + 9.247 * weight + 3.098 * height * 100 - 4.33 * age;
     }
     console.log({ activity });
