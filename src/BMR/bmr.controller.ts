@@ -36,4 +36,9 @@ export class BmrController {
       );
     }
   }
+
+  @Get('/activity')
+  activityLevelList() {
+    return this.bmrService.activityLevelList();
+  }
 }

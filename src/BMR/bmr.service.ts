@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { ActivityLevel } from 'src/constants/enums';
+import { ActivityLevel, Activity } from 'src/constants/enums';
 
 @Injectable()
 export class BmrService {
@@ -48,5 +48,9 @@ export class BmrService {
     if (activity.toLowerCase() === ActivityLevel.ExtraActive) {
       return bmr * 1.9;
     }
+  }
+
+  activityLevelList() {
+    return Activity;
   }
 }
