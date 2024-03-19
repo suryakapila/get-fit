@@ -17,15 +17,15 @@ export class BmrController {
   }
 
   @Get('/:weight/:height/:age/:gender/:activity')
-  getBmr(
-    @Param('weight') weight: number,
-    @Param('height') height: number,
-    @Param('age') age: number,
+  calculator(
+    @Param('weight') weight: string,
+    @Param('height') height: string,
+    @Param('age') age: string,
     @Param('gender') gender: string,
     @Param('activity') activity: string,
-  ): string {
+  ) {
     try {
-      return this.bmrService.getBmr(weight, height, age, gender, activity);
+      return this.bmrService.calculator(weight, height, age, gender, activity);
     } catch (e) {
       console.log(e);
       if (e.status >= 400 && e.status < 500)

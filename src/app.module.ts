@@ -4,6 +4,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { BmrModule } from './BMR/bmr.module';
 import { BmiModule } from './BMI/bmi.module';
+import { CalorieMeterModule } from './calorieMeter/calorieMeter.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
@@ -13,7 +14,7 @@ dotenv.config();
 
 const imports: any[] =
   process.env.NODE_ENV === 'dev' ? [ConfigModule.forRoot()] : [];
-process.env.APP_VERSION = '0.0.2';
+process.env.APP_VERSION = '0.0.3';
 console.log(process.env['DATABASE_URL']);
 @Module({
   imports: [
@@ -24,6 +25,7 @@ console.log(process.env['DATABASE_URL']);
     }),
     BmrModule,
     BmiModule,
+    CalorieMeterModule,
   ],
   controllers: [AppController],
   providers: [AppService],
