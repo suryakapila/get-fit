@@ -5,7 +5,7 @@ import { AppService } from './app.service';
 import { BmrModule } from './BMR/bmr.module';
 import { BmiModule } from './BMI/bmi.module';
 import { CalorieMeterModule } from './calorieMeter/calorieMeter.module';
-import { MongooseModule } from '@nestjs/mongoose';
+//import { MongooseModule } from '@nestjs/mongoose';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 
@@ -18,7 +18,7 @@ process.env.APP_VERSION = '0.0.6';
 @Module({
   imports: [
     ...imports,
-    MongooseModule.forRoot(process.env.DATABASE_URL),
+    //MongooseModule.forRoot(process.env.DATABASE_URL),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'public'),
     }),
