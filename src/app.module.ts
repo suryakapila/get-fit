@@ -14,8 +14,7 @@ dotenv.config();
 
 const imports: any[] =
   process.env.NODE_ENV === 'dev' ? [ConfigModule.forRoot()] : [];
-process.env.APP_VERSION = '0.0.4';
-console.log(process.env['DATABASE_URL']);
+process.env.APP_VERSION = '0.0.5';
 @Module({
   imports: [
     ...imports,
