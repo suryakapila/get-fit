@@ -29,7 +29,7 @@ export class BmrService {
         447.593 + 9.247 * weightInKg + 3.098 * heightInCm - 4.33 * ageInYears;
     }
     const tdee = this.totalDailyEnergyExpenditure(bmr, activity);
-    return tdee;
+    return { tdee: tdee, bmr: bmr };
   }
 
   totalDailyEnergyExpenditure(bmr: number, activity: string) {
