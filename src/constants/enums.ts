@@ -40,3 +40,7 @@ export const enum bodyType {
   Overweight = 'Overweight',
   Obese = 'Obese',
 }
+
+export const enum disclaimer {
+  daysToGoalWeight = `assuming your Total Daily Energy Expended remains constant and there are no other factors influencing your weight loss. It's important to note that this is a simplified example, and individual variations and health considerations should be taken into account when creating a weight loss plan`,
+}
