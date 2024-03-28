@@ -23,6 +23,7 @@ export const Activity = [
     description: 'moderate exercise/sports 3-5 days/week',
   },
   {
+  
     id: ActivityLevel.VeryActive,
     activityLevel: 'Very Active',
     description: 'hard exercise/sports 6-7 days a week',

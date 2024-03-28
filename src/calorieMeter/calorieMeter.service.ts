@@ -127,8 +127,9 @@ export class CalorieMeterService {
     const date = this.getCalendarDate(days);
     const res = `${date}`;
     return {
-      bmi: bmi.bmi.toFixed(1),
-      bmr: bmi.bmrR,
+      idealWeight: idealWeight.toFixed(1) + ' kg',
+      bodyMassIndex: bmi.bmi.toFixed(1),
+      basalMetabolicRate: bmi.bmrR,
       bmiCategory: bmi.bmiCategory,
       daysToGoalWeight: res,
       description: bmi.description,
@@ -140,7 +141,6 @@ export class CalorieMeterService {
   getCalendarDate(days: number) {
     const date = new Date();
     date.setDate(date.getDate() + days);
-    //return only date in format: YYYY-MM-DD
-    return date;
+    return date.toDateString();
   }
 }
