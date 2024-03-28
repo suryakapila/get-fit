@@ -49,21 +49,21 @@ export class CalorieMeterService {
           description = `Danger zone ahead! It's time to hit the brakes on unhealthy habits and take charge of your health. Seek professional guidance and make those lifestyle changes pronto!`;
           calorieDiff = -1 * 1000;
           calorieIntake = tdeeR + calorieDiff;
-          bmiCategory = bodyType.ObeseClass3;
+          bmiCategory = bmiCategories[5].id;
           message = bmiCategories[5].message;
         }
         if (bmi >= 35 && bmi < 40) {
           description = `Okay, this is serious stuff. Your weight might be weighing you down. Let's prioritize healthier choices and get you on the path to a lighter, brighter future!`;
           calorieDiff = -1 * 750;
           calorieIntake = tdeeR + calorieDiff;
-          bmiCategory = bodyType.Obese + '(Class 2)';
+          bmiCategory = bmiCategories[4].id;
           message = bmiCategories[4].message;
         }
         if (bmi >= 30 && bmi < 35) {
           description = `Whoa, looks like you've got some extra baggage to unload. Time to kick those unhealthy habits to the curb and start moving towards a lighter, healthier you!`;
           calorieDiff = -1 * 500;
           calorieIntake = tdeeR + calorieDiff;
-          bmiCategory = bodyType.Obese + '(Class 1)';
+          bmiCategory = bmiCategories[3].id;
           message = bmiCategories[3].message;
         }
       }
