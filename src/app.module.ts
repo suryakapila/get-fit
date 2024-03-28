@@ -10,11 +10,12 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 
 import * as dotenv from 'dotenv';
+import { MealPlannerModule } from './mealPlanner/mealPlanner.module';
 dotenv.config();
 
 const imports: any[] =
   process.env.NODE_ENV === 'dev' ? [ConfigModule.forRoot()] : [];
-process.env.APP_VERSION = '0.1.5';
+process.env.APP_VERSION = '0.1.6';
 @Module({
   imports: [
     ...imports,
@@ -25,6 +26,7 @@ process.env.APP_VERSION = '0.1.5';
     BmrModule,
     BmiModule,
     CalorieMeterModule,
+    MealPlannerModule,
   ],
   controllers: [AppController],
   providers: [AppService],
