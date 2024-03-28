@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { BmiService } from '../BMI/bmi.service';
 import { BmrService } from '../BMR/bmr.service';
-import { bodyType, disclaimer } from 'src/constants/enums';
+import { bodyType, disclaimer, bmiCategories } from 'src/constants/enums';
 
 @Injectable()
 export class CalorieMeterService {
@@ -43,40 +43,47 @@ export class CalorieMeterService {
       let description: string = '';
       let calorieIntake: number = 0;
       let calorieDiff: number = 0;
+      let message: any;
       if (bmiCategory === bodyType.Obese) {
         if (bmi >= 40) {
           description = `Danger zone ahead! It's time to hit the brakes on unhealthy habits and take charge of your health. Seek professional guidance and make those lifestyle changes pronto!`;
           calorieDiff = -1 * 1000;
           calorieIntake = tdeeR + calorieDiff;
-          bmiCategory = bodyType.Obese + '(Class 3)';
+          bmiCategory = bodyType.ObeseClass3;
+          message = bmiCategories[5].message;
         }
         if (bmi >= 35 && bmi < 40) {
           description = `Okay, this is serious stuff. Your weight might be weighing you down. Let's prioritize healthier choices and get you on the path to a lighter, brighter future!`;
           calorieDiff = -1 * 750;
           calorieIntake = tdeeR + calorieDiff;
           bmiCategory = bodyType.Obese + '(Class 2)';
+          message = bmiCategories[4].message;
         }
         if (bmi >= 30 && bmi < 35) {
           description = `Whoa, looks like you've got some extra baggage to unload. Time to kick those unhealthy habits to the curb and start moving towards a lighter, healthier you!`;
           calorieDiff = -1 * 500;
           calorieIntake = tdeeR + calorieDiff;
           bmiCategory = bodyType.Obese + '(Class 1)';
+          message = bmiCategories[3].message;
         }
       }
       if (bmiCategory === bodyType.Overweight) {
         description = `Looks like you've got some extra baggage to unload. Time to kick those unhealthy habits to the curb and start moving towards a lighter, healthier you!`;
         calorieDiff = -1 * 250;
         calorieIntake = tdeeR + calorieDiff;
+        message = bmiCategories[2].message;
       }
       if (bmiCategory === bodyType.Underweight) {
         description = `Being underweight may indicate insufficient nutrition or health problems. Time to beef up those meals and nourish your body for optimal health!`;
         calorieDiff = 250;
         calorieIntake = tdeeR + calorieDiff;
+        message = bmiCategories[0].message;
       }
       if (bmiCategory === bodyType.Normal) {
         description = `Congratulations, you're in the Goldilocks zone of weight! Keep up the balanced lifestyle, and your body will thank you for it.`;
         calorieDiff = 0;
         calorieIntake = tdeeR + calorieDiff;
+        message = bmiCategories[1].message;
       }
       const bmiCategoryData = {
         bmi,
@@ -84,6 +91,7 @@ export class CalorieMeterService {
         bmiCategory,
         description,
         calorieDiff,
+        message,
         totalDailyEnergyExpended: `${tdeeR} kcal/day`,
         calorieIntake: `${calorieIntake} kcal/day`,
       };
@@ -127,13 +135,16 @@ export class CalorieMeterService {
     const date = this.getCalendarDate(days);
     const res = `${date}`;
     return {
+      currentBodyWeight: weight + ' kg',
       idealWeight: idealWeight.toFixed(1) + ' kg',
       bodyMassIndex: bmi.bmi.toFixed(1),
       basalMetabolicRate: bmi.bmrR,
+      totalEnergyExpenditure: bmi.totalDailyEnergyExpended,
       bmiCategory: bmi.bmiCategory,
       daysToGoalWeight: res,
       description: bmi.description,
       calorieIntake: tdee + calorieDiff + ' kcal/day',
+      message: bmi.message,
       disclaimer: disclaimer.daysToGoalWeight,
     };
   }
