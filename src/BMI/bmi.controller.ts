@@ -7,7 +7,7 @@ import {
 } from '@nestjs/common';
 import { BmiService } from './bmi.service';
 
-@Controller('bmi')
+@Controller('/bmi')
 export class BmiController {
   constructor(private readonly bmiService: BmiService) {}
 
