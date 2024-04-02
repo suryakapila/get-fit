@@ -7,7 +7,7 @@ import {
 } from '@nestjs/common';
 import { CalorieMeterService } from './calorieMeter.service';
 
-@Controller('calorieMeter')
+@Controller('/calorieMeter')
 export class CalorieMeterController {
   constructor(private readonly calorieMeterService: CalorieMeterService) {}
 
