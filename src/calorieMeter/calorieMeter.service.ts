@@ -25,7 +25,7 @@ export class CalorieMeterService {
     try {
       const weightInKg = parseFloat(weight);
       const heightInCm = parseFloat(height);
-      const bmi = this.bmiService.calculator(weightInKg, heightInCm);
+      let bmi = this.bmiService.calculator(weightInKg, heightInCm);
       let bmiCategory = this.bmiService.category(
         weightInKg,
         heightInCm,
@@ -51,6 +51,7 @@ export class CalorieMeterService {
           calorieIntake = tdeeR + calorieDiff;
           bmiCategory = bmiCategories[5].id;
           message = bmiCategories[5].message;
+          if (bmi >= 69) bmi = 69;
         }
         if (bmi >= 35 && bmi < 40) {
           description = `Okay, this is serious stuff. Your weight might be weighing you down. Let's prioritize healthier choices and get you on the path to a lighter, brighter future!`;

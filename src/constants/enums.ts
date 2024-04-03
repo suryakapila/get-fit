@@ -80,3 +80,33 @@ export const bmiCategories = [
     message: 'Urgent change! Time to get serious!',
   },
 ].map((item, index) => ({ ...item, index }));
+
+export enum DietGoal {
+  WeightGain = 'weight-gain',
+  WeightLoss = 'weight-loss',
+  WeightMaintenance = 'weight-maintenance',
+  MuscleBuilding = 'muscle-building',
+}
+
+export const MACRO_RATIOS = {
+  [DietGoal.WeightGain]: {
+    protein: 0.2,
+    carbs: 0.5,
+    fat: 0.3,
+  },
+  [DietGoal.WeightLoss]: {
+    protein: 0.3,
+    carbs: 0.4,
+    fat: 0.3,
+  },
+  [DietGoal.WeightMaintenance]: {
+    protein: 0.25,
+    carbs: 0.45,
+    fat: 0.3,
+  },
+  [DietGoal.MuscleBuilding]: {
+    protein: 0.4,
+    carbs: 0.4,
+    fat: 0.2,
+  },
+};
