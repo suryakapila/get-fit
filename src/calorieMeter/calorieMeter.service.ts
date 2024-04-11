@@ -1,7 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { BmiService } from '../BMI/bmi.service';
 import { BmrService } from '../BMR/bmr.service';
-import { bodyType, disclaimer, bmiCategories } from 'src/constants/enums';
+import {
+  bodyType,
+  disclaimer,
+  bmiCategories,
+  DietGoal,
+} from 'src/constants/enums';
 
 @Injectable()
 export class CalorieMeterService {
@@ -13,6 +18,12 @@ export class CalorieMeterService {
   getHello(): string {
     return 'Hello World!';
   }
+  private dietType = {
+    [DietGoal.WeightGain]: '0',
+    [DietGoal.WeightMaintenance]: '1',
+    [DietGoal.WeightLoss]: '2',
+    [DietGoal.MuscleBuilding]: '3',
+  };
 
   //based on TDEE and BMI decide the calorie intake/ suggest calorie deficit/surplus
   calorieIntake(
@@ -43,8 +54,10 @@ export class CalorieMeterService {
       let description: string = '';
       let calorieIntake: number = 0;
       let calorieDiff: number = 0;
+      let dietGoal: string;
       let message: any;
       if (bmiCategory === bodyType.Obese) {
+        dietGoal = this.dietType[DietGoal.WeightLoss];
         if (bmi >= 40) {
           description = `Danger zone ahead! It's time to hit the brakes on unhealthy habits and take charge of your health. Seek professional guidance and make those lifestyle changes pronto!`;
           calorieDiff = -1 * 1000;
@@ -73,24 +86,28 @@ export class CalorieMeterService {
         calorieDiff = -1 * 250;
         calorieIntake = tdeeR + calorieDiff;
         message = bmiCategories[2].message;
+        dietGoal = this.dietType[DietGoal.WeightLoss];
       }
       if (bmiCategory === bodyType.Underweight) {
         description = `Being underweight may indicate insufficient nutrition or health problems. Time to beef up those meals and nourish your body for optimal health!`;
         calorieDiff = 250;
         calorieIntake = tdeeR + calorieDiff;
         message = bmiCategories[0].message;
+        dietGoal = this.dietType[DietGoal.WeightGain];
       }
       if (bmiCategory === bodyType.Normal) {
         description = `Congratulations, you're in the Goldilocks zone of weight! Keep up the balanced lifestyle, and your body will thank you for it.`;
         calorieDiff = 0;
         calorieIntake = tdeeR + calorieDiff;
         message = bmiCategories[1].message;
+        dietGoal = this.dietType[DietGoal.WeightMaintenance];
       }
       const bmiCategoryData = {
         bmi,
         bmrR,
         bmiCategory,
         description,
+        dietGoal,
         calorieDiff,
         message,
         totalDailyEnergyExpended: `${tdeeR} kcal/day`,
@@ -145,6 +162,7 @@ export class CalorieMeterService {
       daysToGoalWeight: days.toString() + ' days',
       estimatedDate: res,
       description: bmi.description,
+      dietGoal: bmi.dietGoal,
       calorieIntake: tdee + calorieDiff + ' kcal/day',
       message: bmi.message,
       disclaimer: disclaimer.daysToGoalWeight,
