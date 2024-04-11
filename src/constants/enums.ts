@@ -81,6 +81,7 @@ export const bmiCategories = [
   },
 ].map((item, index) => ({ ...item, index }));
 
+//MealPlanner
 export enum DietGoal {
   WeightGain = 'weight-gain',
   WeightLoss = 'weight-loss',
@@ -88,10 +89,17 @@ export enum DietGoal {
   MuscleBuilding = 'muscle-building',
 }
 
+export enum MealType {
+  Breakfast = 'breakfast',
+  Lunch = 'lunch',
+  Dinner = 'dinner',
+  Snack = 'snack',
+}
+
 export const MACRO_RATIOS = {
   [DietGoal.WeightGain]: {
-    protein: 0.2,
-    carbs: 0.5,
+    protein: 0.3,
+    carbs: 0.4,
     fat: 0.3,
   },
   [DietGoal.WeightLoss]: {
@@ -100,13 +108,77 @@ export const MACRO_RATIOS = {
     fat: 0.3,
   },
   [DietGoal.WeightMaintenance]: {
-    protein: 0.25,
-    carbs: 0.45,
-    fat: 0.3,
+    protein: 0.35,
+    carbs: 0.4,
+    fat: 0.25,
   },
   [DietGoal.MuscleBuilding]: {
     protein: 0.4,
     carbs: 0.4,
     fat: 0.2,
   },
+};
+
+export const caloriePerMeal = {
+  [DietGoal.WeightGain]: {
+    [MealType.Breakfast]: 0.3,
+    [MealType.Lunch]: 0.2,
+    [MealType.Dinner]: 0.35,
+    [MealType.Snack]: 0.15,
+  },
+  [DietGoal.WeightLoss]: {
+    [MealType.Breakfast]: 0.15,
+    [MealType.Lunch]: 0.35,
+    [MealType.Dinner]: 0.4,
+    [MealType.Snack]: 0.1,
+  },
+  [DietGoal.WeightMaintenance]: {
+    [MealType.Breakfast]: 0.225,
+    [MealType.Lunch]: 0.275,
+    [MealType.Dinner]: 0.325,
+    [MealType.Snack]: 0.175,
+  },
+  [DietGoal.MuscleBuilding]: {
+    [MealType.Breakfast]: 0.3,
+    [MealType.Lunch]: 0.3,
+    [MealType.Dinner]: 0.3,
+    [MealType.Snack]: 0.1,
+  },
+};
+
+export const dietType = {
+  '0': DietGoal.WeightGain,
+  '1': DietGoal.WeightMaintenance,
+  '2': DietGoal.WeightLoss,
+  '3': DietGoal.MuscleBuilding,
+};
+
+export enum MealChoice {
+  Vegetarian = 'veg',
+  Egg = 'egg',
+  NonVegetarian = 'non-veg',
+}
+
+export const mealChoices = {
+  '0': MealChoice.Vegetarian,
+  '1': MealChoice.Egg,
+  '2': MealChoice.NonVegetarian,
+};
+
+//fitZone
+
+export enum WorkoutType {
+  yoga = 'Yoga',
+  cardio = 'Cardio',
+  strength = 'Strength Training',
+  weightLoss = 'Weight Loss',
+  microbreak = 'Microbreak Activities',
+}
+
+export const workoutTypes = {
+  '0': WorkoutType.yoga,
+  '1': WorkoutType.weightLoss,
+  '2': WorkoutType.strength,
+  '3': WorkoutType.microbreak,
+  '4': WorkoutType.cardio,
 };

@@ -8,13 +8,14 @@ import { CalorieMeterModule } from './calorieMeter/calorieMeter.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { FitZoneModule } from './FitZone/fitzone.module';
 
 import * as dotenv from 'dotenv';
 dotenv.config();
 
 const imports: any[] =
   process.env.NODE_ENV === 'dev' ? [ConfigModule.forRoot()] : [];
-process.env.APP_VERSION = '0.2.1';
+process.env.APP_VERSION = '0.4.0';
 @Module({
   imports: [
     ...imports,
@@ -25,6 +26,7 @@ process.env.APP_VERSION = '0.2.1';
     BmrModule,
     BmiModule,
     CalorieMeterModule,
+    FitZoneModule,
   ],
   controllers: [AppController],
   providers: [AppService],
