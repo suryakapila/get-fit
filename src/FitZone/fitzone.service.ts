@@ -30,7 +30,8 @@ export class FitZoneService {
       .limit(limit)
       .exec();
     const count = workout ? workout[0].exercises.length : 0;
-    return { result: workout, count };
+    const result = workout ? workout[0] : {};
+    return { result: result, count };
   }
 
   async getTargetWorkouts(
